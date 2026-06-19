@@ -4,9 +4,6 @@ A machine learning–based Banking ChatBot built with **Python**, **Scikit-learn
 
 The chatbot is trained on a custom banking dataset to understand common customer queries and respond with relevant banking information using intent classification.
 
-**Developed by:** **Mahesh Pawar**
-**GitHub:** https://github.com/MR1229
-
 ---
 
 ## 📖 About the Project
