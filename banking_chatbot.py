@@ -23,9 +23,8 @@ from sklearn.naive_bayes import MultinomialNB
 
 import gradio as gr
 
-# ---------------------------------------------------------------------------
+
 # Configuration
-# ---------------------------------------------------------------------------
 
 DATA_PATH = "banking_support.csv"
 MODEL_PATH = "banking_chatbot_model.pkl"
@@ -44,9 +43,8 @@ nltk.download("stopwords", quiet=True)
 STOPWORDS = set(stopwords.words("english"))
 
 
-# ---------------------------------------------------------------------------
+
 # Text preprocessing
-# ---------------------------------------------------------------------------
 
 def clean_text(text):
     """Lowercase, strip punctuation/numbers, and remove stopwords."""
@@ -56,9 +54,7 @@ def clean_text(text):
     return " ".join(words)
 
 
-# ---------------------------------------------------------------------------
 # Load data and build features
-# ---------------------------------------------------------------------------
 
 def load_dataset(path=DATA_PATH):
     df = pd.read_csv(path)
@@ -72,9 +68,8 @@ def build_vectorizer():
     return TfidfVectorizer(max_features=1500, ngram_range=(1, 2), min_df=1)
 
 
-# ---------------------------------------------------------------------------
+
 # Train, evaluate, and persist the model
-# ---------------------------------------------------------------------------
 
 def train_and_save_model(df):
     vectorizer = build_vectorizer()
@@ -115,9 +110,8 @@ def load_or_train_model(df):
     return train_and_save_model(df)
 
 
-# ---------------------------------------------------------------------------
+
 # Predict intent and generate a response
-# ---------------------------------------------------------------------------
 
 def get_response(question, model, vectorizer, df, threshold=CONFIDENCE_THRESHOLD):
     """
@@ -144,9 +138,8 @@ def get_response(question, model, vectorizer, df, threshold=CONFIDENCE_THRESHOLD
     return response, predicted_category, confidence
 
 
-# ---------------------------------------------------------------------------
+
 # Gradio chat interface
-# ---------------------------------------------------------------------------
 
 def build_chat_function(model, vectorizer, df):
     def chat_fn(message, history):
@@ -181,9 +174,8 @@ def launch_app(model, vectorizer, df):
     demo.launch(share=True)
 
 
-# ---------------------------------------------------------------------------
+
 # Entry point
-# ---------------------------------------------------------------------------
 
 def main():
     df = load_dataset()
